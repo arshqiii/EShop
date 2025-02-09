@@ -20,7 +20,7 @@ public class ProductRepository {
         return productData.iterator();
     }
 
-    public Product findById(int id) {
+    public Product findById(String id) {
         for (Product product : productData){
             if (product.getProductID().equals(id)){
                 return product;
