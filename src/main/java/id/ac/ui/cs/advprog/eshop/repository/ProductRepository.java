@@ -34,21 +34,18 @@ public class ProductRepository {
     }
 
     public Product update(Product updatedProduct) {
-        for (int i = 0; i < productData.size(); i++){
-            if (productData.get(i).getProductID().equals(updatedProduct.getProductID())){
-                productData.set(i, updatedProduct);
-                return updatedProduct;
-            }
+        Product productToEdit = findById(updatedProduct.getProductID());
+        if (productToEdit != null) {
+            productToEdit.setProductName(updatedProduct.getProductName());
+            productToEdit.setProductQuantity(updatedProduct.getProductQuantity());
         }
-        return null;
+        return productToEdit;
     }
 
     public void delete(String id) {
-        for (int i = 0; i < productData.size(); i++){
-            if (productData.get(i).getProductID().equals(id)){
-                productData.remove(i);
-                return;
-            }
+        Product deletedProduct = findById(id);
+        if (deletedProduct != null) {
+            productData.remove(deletedProduct);
         }
     }
 }
