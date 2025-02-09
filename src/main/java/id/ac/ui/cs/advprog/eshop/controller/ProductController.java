@@ -22,9 +22,25 @@ public class ProductController {
         return "createProduct";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editProductPage(@PathVariable int id, Model model) {
+        Product product = service.findById(id);
+        if (product == null) {
+            return "redirect:/product/list";
+        }
+        model.addAttribute("product", product);
+        return "editProduct";
+    }
+
     @PostMapping("/create")
     public String createProduct(@ModelAttribute Product product, Model model) {
         service.create(product);
+        return "redirect:list";
+    }
+
+    @PostMapping("/edit")
+    public String editProduct(@ModelAttribute Product product, Model model) {
+        service.update(product);
         return "redirect:list";
     }
 
