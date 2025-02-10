@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,4 +62,64 @@ class ProductRepositoryTest {
         assertEquals(product2.getProductID(), savedProduct.getProductID());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testFindByIdIfNotExist(){
+        String idThatDoesntExist = "123ebd3d-239-460e-8880-71af6af63bd6";
+        assertNull(productRepository.findById(idThatDoesntExist));
+    }
+
+    @Test
+    void testUpdateProduct(){
+        Product product = new Product();
+        product.setProductID("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        product.setProductName("Sampo Cap Bango");
+        product.setProductQuantity(1000);
+        productRepository.update(product);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct = productIterator.next();
+        assertEquals(product.getProductID(), savedProduct.getProductID());
+        assertEquals(product.getProductName(), savedProduct.getProductName());
+        assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
+    }
+
+    @Test
+    void testDeleteProduct(){
+        Product product = new Product();
+        product.setProductID("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        assertNotNull(productRepository.findById(product.getProductID()));
+        productRepository.delete(product.getProductID());
+        assertNull(productRepository.findById(product.getProductID()));
+    }
+
+    @Test
+    void testDeleteProductIfNotExist(){
+        String idThatDoesntExist = "123ebd3d-239-460e-8880-71af6af63bd6";
+        assertNull(productRepository.findById(idThatDoesntExist));
+        boolean deleted = productRepository.delete(idThatDoesntExist);
+        assertFalse(deleted);
+    }
+
+    @Test
+    void testEditProductIfNotExist(){
+        Product product = new Product();
+        product.setProductID("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+
+        Product productThatDoesntExist = productRepository.update(product);
+
+        assertNull(productThatDoesntExist);
+    }
+
 }
