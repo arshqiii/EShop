@@ -2,7 +2,17 @@
 ## Muhammad Radhiya Arshq - 2306275885
 
 ### Refleksi 1
-> You already implemented two new features using Spring Boot. Check again your source code and evaluate the coding standards that you have learned in this module. Write clean code principles and secure coding practices that have been applied to your code.  If you find any mistake in your source code, please explain how to improve your code.
+
+Dari mengerjakan Tutorial dan exercise, saya menggunakan beberapa coding standards dalam mengimplementasi fitur-fitur aplikasi seperti :
+
+    - Menggunakan nama yang bermakna pada variabel seperti productID, productName dan pada nama function seperti create, update, delete yang dapat dimengerti dengan jelas
+    - Menerapkan One Function One Task, saya membuat function findByID untuk mencari product berdasarkan ID, dan fungsi ini hanya melakukan hal tersebut sama seperti create, update dan delete.
+    - Menggunakan format yang seragam, seperti indentation yang rapi, penggunaan camelCase untuk variabel dan metode, serta PascalCase untuk nama kelas.
+    - Beberapa fungsi yang memiliki pola serupa telah direfaktor ke dalam metode yang dapat digunakan kembali agar lebih modular dan mudah dikelola seperti pada update dan delete menggunakan fungsi findByID untuk mendapat objek product.
+
+Kode yang saya tulis sudah cukup memenuhi prinsip clean code dan secure coding, namun masih ada beberapa aspek yang bisa ditingkatkan untuk meningkatkan maintainability dan keamanan sistem. 
+Ini dapat dilakukan dengan menggunakan UUID dalam pembuatan produk. Ini karena sebelumnya ketika objek product dibuat, ID dari objek tersebut null/kosong sehingga harus dibuat id unik, ini bisa menggunakan UUID atau counter. 
+Lalu mungkin untuk dapat menggunakan data struktur yang lebih baik untuk menyimpan data produk dibanding sebuah list. 
 
 
 
