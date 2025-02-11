@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HomePageController {
-    @Autowired
-    private ProductService service;
     @GetMapping("/")
     public String homePage(Model model) {
-        model.addAttribute("products", service.findAll());
         return "HomePage";
     }
 }
