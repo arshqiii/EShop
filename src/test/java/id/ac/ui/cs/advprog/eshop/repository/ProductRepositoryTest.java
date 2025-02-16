@@ -21,6 +21,8 @@ class ProductRepositoryTest {
     ProductRepository productRepository;
     @BeforeEach
     @Test
+    void setUp() {
+    }
     void testCreateAndFind() {
         Product product = new Product();
         product.setProductID("eb558e9f-1c39-460e-8860-71af6af63bd6");
