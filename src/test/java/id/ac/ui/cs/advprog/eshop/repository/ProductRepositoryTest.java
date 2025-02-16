@@ -1,24 +1,25 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
-import id.ac.ui.cs.advprog.eshop.model.Product;
+import java.util.Iterator;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import id.ac.ui.cs.advprog.eshop.model.Product;
 
 @ExtendWith(MockitoExtension.class)
 class ProductRepositoryTest {
     @InjectMocks
     ProductRepository productRepository;
     @BeforeEach
-    void setUp() {
-    }
     @Test
     void testCreateAndFind() {
         Product product = new Product();
