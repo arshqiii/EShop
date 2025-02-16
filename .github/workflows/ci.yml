@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Check out the Git repository
         uses: actions/checkout@v4
+      - name: Grant permission to Gradle wrapper
+        run: chmod +x gradlew
       - name: Set up Java toolchain
         uses: actions/setup-java@v4
         with:
