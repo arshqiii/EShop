@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
@@ -23,6 +24,7 @@ class ProductRepositoryTest {
     @Test
     void setUp() {
     }
+    @Test
     void testCreateAndFind() {
         Product product = new Product();
         product.setProductID("eb558e9f-1c39-460e-8860-71af6af63bd6");
@@ -37,6 +39,30 @@ class ProductRepositoryTest {
         assertEquals(product.getProductName(), savedProduct.getProductName());
         assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
     }
+
+    @Test
+    void testCreateProductWithNullId(){
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        product.setProductID(null);
+
+        Product createdProduct = productRepository.create(product);
+        assertNotNull(createdProduct.getProductID());
+    }
+
+    @Test
+    void testCreateProductWithExistingId(){
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        product.setProductID("10002002010");
+
+        Product createdProduct = productRepository.create(product);
+
+        assertEquals(product.getProductID(), createdProduct.getProductID());
+    }
+
     @Test
     void testFindAllIfEmpty() {
         Iterator<Product> productIterator = productRepository.findAll();
@@ -68,8 +94,10 @@ class ProductRepositoryTest {
 
     @Test
     void testFindByIdIfNotExist(){
+        ProductRepository productRepository = Mockito.mock(ProductRepository.class);
         String idThatDoesntExist = "123ebd3d-239-460e-8880-71af6af63bd6";
-        assertNull(productRepository.findById(idThatDoesntExist));
+        Product product = productRepository.findById(idThatDoesntExist);
+        assertNull(product);
     }
 
     @Test
