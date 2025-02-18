@@ -52,6 +52,17 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testCreateProductWithEmptyId(){
+        Product product = new Product();
+        product.setProductID("");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+
+        Product createdProduct = productRepository.create(product);
+        assertNotNull(createdProduct.getProductID());
+    }
+
+    @Test
     void testCreateProductWithExistingId(){
         Product product = new Product();
         product.setProductName("Sampo Cap Bambang");
@@ -72,7 +83,6 @@ class ProductRepositoryTest {
         assertNull(createdProduct.getProductName());
         assertEquals(0, createdProduct.getProductQuantity());
     }
-
 
     @Test
     void testFindAllIfEmpty() {
@@ -104,23 +114,26 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testFindByIdIfExists() {
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product foundProduct = productRepository.findById(product.getProductID());
+        assertNotNull(foundProduct.getProductID());
+        assertEquals(product.getProductID(), foundProduct.getProductID());
+    }
+    @Test
     void testFindByIdIfNotExist(){
-        ProductRepository productRepository = Mockito.mock(ProductRepository.class);
-        Product product1 = new Product();
-        product1.setProductName("Sampo Cap Bambang");
-        product1.setProductQuantity(100);
-
-
-        Product product2 = new Product();
-        product2.setProductName("Sampo Cap Usep");
-        product2.setProductQuantity(50);
-
-        productRepository.create(product1);
-        productRepository.create(product2);
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
 
         String idThatDoesntExist = "123ebd3d-239-460e-8880-71af6af63bd6";
-        Product product = productRepository.findById(idThatDoesntExist);
-        assertNull(product);
+        Product result = productRepository.findById(idThatDoesntExist);
+        assertNull(result);
     }
 
     @Test
