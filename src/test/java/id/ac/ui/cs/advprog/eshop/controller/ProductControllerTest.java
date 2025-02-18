@@ -72,7 +72,7 @@ public class ProductControllerTest {
         when(productService.findById(product.getProductID())).thenReturn(null);
         mockMvc.perform(get("/product/edit/" + product.getProductID()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/product/list"));;
+                .andExpect(redirectedUrl("/product/list"));
         verify(productService, times(1)).findById(product.getProductID());
     }
 
