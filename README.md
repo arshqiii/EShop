@@ -1,6 +1,11 @@
 # EShop - ADV Shop
 ## Muhammad Radhiya Arshq - 2306275885
 
+<details>
+    <summary><b>Tutorial 1</b></summary>
+  
+---
+  
 ### Refleksi 1
 
 > You already implemented two new features using Spring Boot. Check again your source code and evaluate the coding standards that you have learned in this module. Write clean code principles and secure coding practices that have been applied to your code. If you find any mistake in your source code, please explain how to improve your code.
@@ -16,6 +21,8 @@ Kode yang saya tulis sudah cukup memenuhi prinsip clean code dan secure coding, 
 Ini dapat dilakukan dengan menggunakan UUID dalam pembuatan produk. Ini karena sebelumnya ketika objek product dibuat, ID dari objek tersebut null/kosong sehingga harus dibuat id unik, ini bisa menggunakan UUID atau counter. 
 Lalu mungkin dapat menggunakan data struktur yang lebih baik untuk menyimpan data produk dibanding sebuah list. Selain itu juga tidak terdapat exception jika pengguna mengisi quantity product kurang dari nol.
 
+---
+
 ### Refleksi 2
 > After writing the unit test, how do you feel? How many unit tests should be made in a class? How to make sure that our unit tests are enough to verify our program? It would be good if you learned about code coverage. Code coverage is a metric that can help you understand how much of your source is tested. If you have 100% code coverage, does that mean your code has no bugs or errors?
 
@@ -28,4 +35,22 @@ Dengan dibuat unit test proses debugging menjadi lebih mudah karena saya bisa de
 
 Jika disuruh membuat sebuah functional test dengan membuat kode yang sama maka kita akan mengurangi kualitas kode dengan meningkatkan redundansi, mengurangi keterbacaan, meningkatkan kompleksitas pemeliharaan, dan melanggar prinsip Don't Repeat Yourself (DRY).
 Kita bisa tetap menjaga kebersihan kode dengan menggunakan pendekatan seperti membuat superclass abstrak yang menangani setup umum untuk testing sehingga mengurangi duplikasi kode dan menjaga kebersihan kode
+  
+</details>
+
+<details>
+    <summary><b>Tutorial 2</b></summary>
+
+---
+
+### Refleksi
+> List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.
+
+---
+
+> Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
+
+</details>
+
+
 
