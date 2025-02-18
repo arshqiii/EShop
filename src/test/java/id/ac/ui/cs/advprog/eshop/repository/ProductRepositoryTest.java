@@ -64,6 +64,17 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testCreateProductWithoutAnyFields() {
+        Product product = new Product();
+        Product createdProduct = productRepository.create(product);
+
+        assertNotNull(createdProduct.getProductID());
+        assertNull(createdProduct.getProductName());
+        assertEquals(0, createdProduct.getProductQuantity());
+    }
+
+
+    @Test
     void testFindAllIfEmpty() {
         Iterator<Product> productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());
@@ -95,6 +106,18 @@ class ProductRepositoryTest {
     @Test
     void testFindByIdIfNotExist(){
         ProductRepository productRepository = Mockito.mock(ProductRepository.class);
+        Product product1 = new Product();
+        product1.setProductName("Sampo Cap Bambang");
+        product1.setProductQuantity(100);
+
+
+        Product product2 = new Product();
+        product2.setProductName("Sampo Cap Usep");
+        product2.setProductQuantity(50);
+
+        productRepository.create(product1);
+        productRepository.create(product2);
+
         String idThatDoesntExist = "123ebd3d-239-460e-8880-71af6af63bd6";
         Product product = productRepository.findById(idThatDoesntExist);
         assertNull(product);
