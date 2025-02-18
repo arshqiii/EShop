@@ -42,10 +42,12 @@ public class ProductRepository {
         return productToEdit;
     }
 
-    public void delete(String id) {
+    public boolean delete(String id) {
         Product deletedProduct = findById(id);
         if (deletedProduct != null) {
             productData.remove(deletedProduct);
+            return true;
         }
+        return false;
     }
 }
