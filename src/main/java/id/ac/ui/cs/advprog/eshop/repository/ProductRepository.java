@@ -44,9 +44,6 @@ public class ProductRepository {
 
     public boolean delete(String id) {
         Product deletedProduct = findById(id);
-        if (deletedProduct != null) {
-            return productData.remove(deletedProduct);
-        }
-        return false;
+        return deletedProduct != null && productData.remove(deletedProduct);
     }
 }
