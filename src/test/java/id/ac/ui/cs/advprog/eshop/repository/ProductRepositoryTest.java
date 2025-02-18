@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
@@ -23,6 +24,7 @@ class ProductRepositoryTest {
     @Test
     void setUp() {
     }
+    @Test
     void testCreateAndFind() {
         Product product = new Product();
         product.setProductID("eb558e9f-1c39-460e-8860-71af6af63bd6");
@@ -37,6 +39,51 @@ class ProductRepositoryTest {
         assertEquals(product.getProductName(), savedProduct.getProductName());
         assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
     }
+
+    @Test
+    void testCreateProductWithNullId(){
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        product.setProductID(null);
+
+        Product createdProduct = productRepository.create(product);
+        assertNotNull(createdProduct.getProductID());
+    }
+
+    @Test
+    void testCreateProductWithEmptyId(){
+        Product product = new Product();
+        product.setProductID("");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+
+        Product createdProduct = productRepository.create(product);
+        assertNotNull(createdProduct.getProductID());
+    }
+
+    @Test
+    void testCreateProductWithExistingId(){
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        product.setProductID("10002002010");
+
+        Product createdProduct = productRepository.create(product);
+
+        assertEquals(product.getProductID(), createdProduct.getProductID());
+    }
+
+    @Test
+    void testCreateProductWithoutAnyFields() {
+        Product product = new Product();
+        Product createdProduct = productRepository.create(product);
+
+        assertNotNull(createdProduct.getProductID());
+        assertNull(createdProduct.getProductName());
+        assertEquals(0, createdProduct.getProductQuantity());
+    }
+
     @Test
     void testFindAllIfEmpty() {
         Iterator<Product> productIterator = productRepository.findAll();
@@ -67,9 +114,26 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testFindByIdIfExists() {
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product foundProduct = productRepository.findById(product.getProductID());
+        assertNotNull(foundProduct.getProductID());
+        assertEquals(product.getProductID(), foundProduct.getProductID());
+    }
+    @Test
     void testFindByIdIfNotExist(){
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
         String idThatDoesntExist = "123ebd3d-239-460e-8880-71af6af63bd6";
-        assertNull(productRepository.findById(idThatDoesntExist));
+        Product result = productRepository.findById(idThatDoesntExist);
+        assertNull(result);
     }
 
     @Test
