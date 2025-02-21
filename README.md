@@ -46,18 +46,17 @@ Kita bisa tetap menjaga kebersihan kode dengan menggunakan pendekatan seperti me
 ### Refleksi
 > List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.
 
-Terdapat beberapa code quality issue yang saya perbaiki selama pengerjaan exercise ini, code quality issue ini dideteksi oleh workflow Scorecard & PMD. 
-
-- Token-Permissions : menambahkan properti permissions di bagian atas file workflow untuk membatasi akses GITHUB_TOKEN 
-- Dependency-Update-Tool : menambahkan dependancy update tool berupa dependabot untuk mendeteksi dependancies yang out of date
-- Menghapus modifier public pada method-method interface karena tidak diperlukan dan memperbaiki if else statements dengan me-return hasil dari conditional test.
-- Menambahkan branch protection yang membatasi creation, update, dan delete pada branch main
+Selama mengerjakan exercise ini, saya menemukan beberapa code quality issues yang dideteksi oleh workflow Scorecard dan PMD. Berikut adalah perbaikan yang saya lakukan:
+- Token-Permission : Menambahkan properti permissions di bagian atas file workflow untuk membatasi akses GITHUB_TOKEN, sehingga mengurangi potensi risiko keamanan.
+- Dependency-Update-Tool : Mengintegrasikan Dependabot sebagai alat pembaruan dependensi otomatis, sehingga dapat mendeteksi dependensi yang sudah outdated dan menyarankan pembaruan secara berkala.
+- Refactor Kode untuk Peningkatan Kualitas : Menghapus modifier public pada metode dalam interface karena tidak diperlukan serta Memperbaiki struktur if-else statements dengan menggantinya menggunakan return langsung dari hasil conditional test, sehingga kode menjadi lebih bersih dan mudah dibaca.
+- Branch Protection : Menambahkan aturan perlindungan (branch protection rules) untuk membatasi creation, update, dan delete pada branch main, sehingga memastikan hanya perubahan yang telah diverifikasi yang bisa masuk ke dalam production.
 
 ---
 
 > Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
 
-Menurut saya, implementasi yang saya terapkan lewat Github Actions dan Koyeb telah memenuhi definisi dari Continuous Integration & Continuous Deployement. Project ini menerapkan CI dengan workflow yang diterapkan pada ci.yml yang bertugas untuk membuat build dan melakukan unit testing secara otomatis ketika dilakukan git push. Ini tentu dibantu dengan beberapa alat yang di-integrasi seperti PMD, dependabot, scorecard, serta unit test yang telah dibuat. Untuk penerapan CD, project ini mengimplementasikan mekanisme auto deploy  pada PaaS Koyeb yang memungkinkan deployment secara otomatis ketika terjadi push pada git repository.
+Menurut saya, implementasi CI/CD yang diterapkan dalam proyek ini sudah memenuhi definisi Continuous Integration (CI) dan Continuous Deployment (CD). Workflow ci.yml di GitHub Actions secara otomatis membangun proyek dan menjalankan unit testing setiap kali ada push ke repositori (CI), proses ini diperkuat dengan alat bantu seperti PMD, Dependabot, Scorecard, serta unit test yang memastikan kualitas kode tetap terjaga. Proyek ini juga menerapkan mekanisme auto deploy menggunakan PaaS Koyeb, sehingga setiap perubahan yang dilakukan dalam repositori akan langsung diterapkan ke lingkungan produksi tanpa perlu intervensi manual (CD). Dengan kombinasi CI/CD ini, integrasi dan penerapan perubahan dalam proyek menjadi lebih cepat dan andal.
 
 </details>
 
