@@ -38,10 +38,13 @@ public class CarRepository {
 
     public Car update(String id, Car updatedCar) {
         Car car = findById(id);
-        car.setCarName(updatedCar.getCarName());
-        car.setCarColor(updatedCar.getCarColor());
-        car.setCarQuantity(updatedCar.getCarQuantity());
-        return car;
+        if (car != null) {
+            car.setCarName(updatedCar.getCarName());
+            car.setCarColor(updatedCar.getCarColor());
+            car.setCarQuantity(updatedCar.getCarQuantity());
+            return car;
+        }
+        return null;
     }
 
     public void delete(String id) {
