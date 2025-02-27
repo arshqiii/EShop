@@ -4,9 +4,8 @@ import lombok.Setter;
 
 
 @Getter @Setter
-public class Car {
-    private String carId;
-    private String carName;
+public class Car extends BaseModel {
+
     private String carColor;
-    private int carQuantity;
+
 }
