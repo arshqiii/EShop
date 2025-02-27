@@ -43,8 +43,8 @@ public class ProductControllerTest {
     @Test
     void testCreateProduct() throws Exception {
         Product product = new Product();
-        product.setProductName("Test");
-        product.setProductQuantity(10);
+        product.setName("Test");
+        product.setQuantity(10);
 
         mockMvc.perform(post("/product/create")
                         .flashAttr("product", product))
@@ -57,9 +57,9 @@ public class ProductControllerTest {
     @Test
     void testUpdateProductPage() throws Exception {
         Product product = new Product();
-        product.setProductID(UUID.randomUUID().toString());
-        when(productService.findById(product.getProductID())).thenReturn(product);
-        mockMvc.perform(get("/product/edit/" + product.getProductID()))
+        product.setId(UUID.randomUUID().toString());
+        when(productService.findById(product.getId())).thenReturn(product);
+        mockMvc.perform(get("/product/edit/" + product.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("editProduct"))
                 .andExpect(model().attributeExists("product"));
@@ -68,20 +68,20 @@ public class ProductControllerTest {
     @Test
     void testUpdateProductPage_NotFound() throws Exception {
         Product product = new Product();
-        product.setProductID(UUID.randomUUID().toString());
-        when(productService.findById(product.getProductID())).thenReturn(null);
-        mockMvc.perform(get("/product/edit/" + product.getProductID()))
+        product.setId(UUID.randomUUID().toString());
+        when(productService.findById(product.getId())).thenReturn(null);
+        mockMvc.perform(get("/product/edit/" + product.getId()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/product/list"));
-        verify(productService, times(1)).findById(product.getProductID());
+        verify(productService, times(1)).findById(product.getId());
     }
 
     @Test
     void testUpdateProduct() throws Exception {
         Product product = new Product();
-        product.setProductID(UUID.randomUUID().toString());
-        product.setProductName("Test");
-        product.setProductQuantity(10);
+        product.setId(UUID.randomUUID().toString());
+        product.setName("Test");
+        product.setQuantity(10);
 
        when(productService.update(any(Product.class))).thenReturn(product);
 
