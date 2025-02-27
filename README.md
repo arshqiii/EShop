@@ -60,5 +60,61 @@ Menurut saya, implementasi CI/CD yang diterapkan dalam proyek ini sudah memenuhi
 
 </details>
 
+<details>
+    <summary><b>Tutorial 3</b></summary>
+
+---
+
+### Refleksi
+
+> 1) Explain what principles you apply to your project!
+
+Dalam proyek ini, saya menerapkan SOLID principles untuk memastikan kode lebih terstruktur, mudah dipelihara, dan scalable. Berikut adalah bagaimana prinsip tersebut saya terapkan:
+
+-  Single Responsibility Principle (SRP) – Saya memisahkan tanggung jawab di dalam proyek, misalnya dengan membuat controller terpisah untuk Homepage, Car, dan Product. Ini memastikan setiap kelas hanya menangani satu aspek fungsionalitas.
+
+- Open/Closed Principle (OCP) – Saya membuat model abstrak `BaseModel`, yang memungkinkan model lain untuk melakukan ekstensi tanpa perlu memodifikasi kode yang sudah ada. Dengan begitu, kode tetap stabil meskipun ada fitur baru yang ditambahkan.
+
+- Liskov Substitution Principle (LSP) – Saya memastikan bahwa subclass yang dibuat dapat menggantikan superclass tanpa mengubah perilaku aplikasi. Contohnya, saya dengan adanya atribut Color pada subclass Car, yang tidak mengganggu superclassnya `BaseModel`.
+
+- Interface Segregation Principle (ISP) – Saya menghindari dependensi yang tidak perlu dengan memastikan hanya kelas tertentu yang bergantung pada interface yang mereka butuhkan. Misalnya, `CarServiceImpl` dan `ProductServiceImpl` hanya mengimplementasikan interface yang relevan dengan fungsinya.
+
+- Dependency Inversion Principle (DIP) – Saya mengganti instance langsung dari `CarServiceImpl` dalam Controller dengan interface `CarService`. Dengan cara ini, kode lebih fleksibel dan tidak bergantung pada implementasi spesifik, sehingga lebih mudah diuji dan dikembangkan.
+
+---
+> 2) Explain the advantages of applying SOLID principles to your project with examples.
+
+Menggunakan prinsip SOLID dalam proyek Spring Boot memberikan banyak keuntungan:
+
+- Maintainability yang Lebih Baik : Dengan SRP, kode lebih bersih dan terorganisir. Setiap perubahan hanya perlu dilakukan di satu tempat tanpa mengganggu bagian lain.
+
+- Kemudahan dalam Pengembangan dan Ekstensi : OCP memastikan bahwa fitur baru dapat ditambahkan tanpa merusak kode lama. Jika saya ingin menambahkan model atau fitur baru, saya cukup membuat subclass atau meng-extend yang sudah ada.
+
+- Pewarisan yang Lebih Aman dan Stabil : LSP memastikan bahwa subclass bisa menggantikan superclass tanpa masalah. Ini mencegah bug akibat perilaku yang tidak sesuai ketika pewarisan digunakan.
+
+- Kode yang Modular dan Fleksibel : ISP membantu memecah dependensi yang tidak perlu, sehingga kelas hanya menggunakan interface yang relevan dengan tugasnya. Ini mencegah kode yang membengkak dengan metode yang tidak digunakan.
+
+- Kemudahan dalam Pengujian dan Pengembangan : DIP membuat kode lebih fleksibel karena bergantung pada abstraksi, bukan implementasi konkret. Dengan cara ini, pengujian unit dan penggantian layanan menjadi lebih mudah, yang mempercepat pengembangan.
+
+---
+> 3) Explain the disadvantages of not applying SOLID principles to your project with examples.
+
+Tanpa menerapkan prinsip SOLID, proyek dapat mengalami berbagai tantangan yang memperlambat pengembangan dan meningkatkan risiko bug. Beberapa konsekuensinya adalah:
+
+- Kode Sulit Dipelihara (Maintainability): kode cenderung menjadi tidak terstruktur dan sulit dipahami. Perubahan kecil pada satu bagian kode dapat memengaruhi bagian lain secara tidak terduga, sehingga meningkatkan risiko bug dan mempersulit proses pemeliharaan.
+
+- Kode Sulit Diperluas (Extensibility): Tanpa prinsip seperti Open/Closed Principle (terbuka untuk ekstensi, tertutup untuk modifikasi), menambahkan fitur baru menjadi lebih rumit dan berisiko. Perubahan sering kali memerlukan modifikasi besar pada kode yang sudah ada, yang dapat merusak fungsionalitas yang sudah berjalan.
+
+- Tingginya Keterikatan (High Coupling): Jika prinsip seperti Dependency Inversion Principle tidak diterapkan, komponen-komponen dalam sistem menjadi sangat tergantung satu sama lain. Hal ini membuat kode sulit diisolasi, diuji, dan digunakan kembali.
+
+- Kesulitan dalam Pengujian (Testing): Kode yang tidak mengikuti SOLID cenderung sulit diuji secara terpisah (unit testing). Ketergantungan yang tinggi antara komponen membuat pengujian otomatis menjadi lebih kompleks dan memakan waktu.
+
+- Biaya Pengembangan yang Lebih Tinggi: Dalam jangka panjang, kode yang tidak mengikuti SOLID akan membutuhkan lebih banyak waktu dan sumber daya untuk dipelihara, diperbaiki, dan dikembangkan. Hal ini dapat meningkatkan biaya pengembangan secara signifikan.
+
+---
+
+
+</details>
+
 
 
