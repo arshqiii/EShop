@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import id.ac.ui.cs.advprog.eshop.model.Order;
 
-class OrderRepositoryTest {
+class OrderRepositoryTest  {
 
     OrderRepository orderRepository;
 
