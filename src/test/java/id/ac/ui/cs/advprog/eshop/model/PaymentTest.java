@@ -93,6 +93,7 @@ class PaymentTest {
         Map<String, String> codWithoutAddress = new HashMap<>(this.cashOnDeliveryDetails);
         codWithoutAddress.put("address", "");
         codWithoutAddress.put("deliveryFee", "25000");
+        assertEquals("SUCCESS", payment.getStatus());
 
         assertThrows(IllegalArgumentException.class,
                 () -> new Payment("CASH_ON_DELIVERY", codWithoutAddress, this.customerOrder));
