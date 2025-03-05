@@ -56,16 +56,16 @@ class PaymentTest {
     void testCreatePaymentWithInvalidVoucherPrefix() {
         Map<String, String> voucherWithoutPrefix = new HashMap<>();
         voucherWithoutPrefix.put("voucherCode", "1234567890XYZABC");
-        assertThrows(IllegalArgumentException.class,
-                () -> new Payment("VOUCHER", voucherWithoutPrefix, this.customerOrder));
+        Payment payment = new Payment("VOUCHER", voucherWithoutPrefix, this.customerOrder);
+        assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
     void testCreatePaymentWithMissingNumberOnVoucher() {
         Map<String, String> voucherMissingNumber = new HashMap<>();
         voucherMissingNumber.put("voucherCode", "ESHOP1234WESHXYZ");
-        assertThrows(IllegalArgumentException.class,
-                () -> new Payment("VOUCHER", voucherMissingNumber, this.customerOrder));
+        Payment payment = new Payment("VOUCHER", voucherMissingNumber, this.customerOrder);
+        assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
@@ -74,10 +74,10 @@ class PaymentTest {
         Map<String, String> voucherTooLong = new HashMap<>();
         voucherTooShort.put("voucherCode", "ESHOP123456");
         voucherTooLong.put("voucherCode", "ESHOP1234ABC5678D");
-        assertThrows(IllegalArgumentException.class,
-                () -> new Payment("VOUCHER", voucherTooShort, this.customerOrder));
-        assertThrows(IllegalArgumentException.class,
-                () -> new Payment("VOUCHER", voucherTooLong, this.customerOrder));
+        Payment payment1 = new Payment("VOUCHER", voucherTooShort, this.customerOrder);
+        Payment payment2 = new Payment("VOUCHER", voucherTooLong, this.customerOrder);
+        assertEquals("REJECTED", payment1.getStatus());
+        assertEquals("REJECTED", payment2.getStatus());
     }
 
     @Test
@@ -90,23 +90,20 @@ class PaymentTest {
 
     @Test
     void testCreatePaymentWithMissingAddress() {
-        Map<String, String> codWithoutAddress = new HashMap<>(this.cashOnDeliveryDetails);
+        Map<String, String> codWithoutAddress = new HashMap<>();
         codWithoutAddress.put("address", "");
         codWithoutAddress.put("deliveryFee", "25000");
-        assertEquals("SUCCESS", payment.getStatus());
-
-        assertThrows(IllegalArgumentException.class,
-                () -> new Payment("CASH_ON_DELIVERY", codWithoutAddress, this.customerOrder));
+        Payment payment1 = new Payment("CASH_ON_DELIVERY", codWithoutAddress, this.customerOrder);
+        assertEquals("REJECTED", payment1.getStatus());
     }
 
     @Test
     void testCreatePaymentWithMissingDeliveryFee() {
-        Map<String, String> codWithoutFee = new HashMap<>(this.cashOnDeliveryDetails);
-        codWithoutFee.put("address", "Jl. Jagakarsa 1, No. 23");
+        Map<String, String> codWithoutFee = new HashMap<>();
+        codWithoutFee.put("address", "Jalan Depok");
         codWithoutFee.put("deliveryFee", "");
-
-        assertThrows(IllegalArgumentException.class,
-                () -> new Payment("CASH_ON_DELIVERY", codWithoutFee, this.customerOrder));
+        Payment payment1 = new Payment("CASH_ON_DELIVERY", codWithoutFee, this.customerOrder);
+        assertEquals("REJECTED", payment1.getStatus());
     }
 
     @Test
