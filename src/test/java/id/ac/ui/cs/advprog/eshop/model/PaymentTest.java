@@ -41,12 +41,15 @@ class PaymentTest {
 
     @Test
     void testCreatePaymentWithoutData(){
-        assertThrows(IllegalArgumentException.class, () -> new Payment("VOUCHER", null, this.customerOrder));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Payment("a5e93216-127c-43df-b7f1-89b720e496bb",
+                        "VOUCHER", null, this.customerOrder));
     }
 
     @Test
     void testCreatePaymentWithValidVoucherDetails() {
-        Payment payment = new Payment("VOUCHER", this.voucherDetails, this.customerOrder);
+        Payment payment = new Payment("a5e93216-127c-43df-b7f1-89b720e496bb",
+                "VOUCHER", this.voucherDetails, this.customerOrder);
         assertEquals("SUCCESS", payment.getStatus());
         assertEquals(this.voucherDetails, payment.getPaymentData());
         assertEquals(this.customerOrder, payment.getOrder());
@@ -56,7 +59,8 @@ class PaymentTest {
     void testCreatePaymentWithInvalidVoucherPrefix() {
         Map<String, String> voucherWithoutPrefix = new HashMap<>();
         voucherWithoutPrefix.put("voucherCode", "1234567890XYZABC");
-        Payment payment = new Payment("VOUCHER", voucherWithoutPrefix, this.customerOrder);
+        Payment payment = new Payment("a5e93216-127c-43df-b7f1-89b720e496bb",
+                "VOUCHER", voucherWithoutPrefix, this.customerOrder);
         assertEquals("REJECTED", payment.getStatus());
     }
 
@@ -64,7 +68,8 @@ class PaymentTest {
     void testCreatePaymentWithMissingNumberOnVoucher() {
         Map<String, String> voucherMissingNumber = new HashMap<>();
         voucherMissingNumber.put("voucherCode", "ESHOP1234WESHXYZ");
-        Payment payment = new Payment("VOUCHER", voucherMissingNumber, this.customerOrder);
+        Payment payment = new Payment("a5e93216-127c-43df-b7f1-89b720e496bb",
+                "VOUCHER", voucherMissingNumber, this.customerOrder);
         assertEquals("REJECTED", payment.getStatus());
     }
 
@@ -74,15 +79,18 @@ class PaymentTest {
         Map<String, String> voucherTooLong = new HashMap<>();
         voucherTooShort.put("voucherCode", "ESHOP123456");
         voucherTooLong.put("voucherCode", "ESHOP1234ABC5678D");
-        Payment payment1 = new Payment("VOUCHER", voucherTooShort, this.customerOrder);
-        Payment payment2 = new Payment("VOUCHER", voucherTooLong, this.customerOrder);
+        Payment payment1 = new Payment("a5e93216-127c-43df-b7f1-89b720e496bb",
+                "VOUCHER", voucherTooShort, this.customerOrder);
+        Payment payment2 = new Payment("7148aec0-26ea-47a1-aafe-c9eb598985f8",
+                "VOUCHER", voucherTooLong, this.customerOrder);
         assertEquals("REJECTED", payment1.getStatus());
         assertEquals("REJECTED", payment2.getStatus());
     }
 
     @Test
     void testCreatePaymentWithValidCashOnDeliveryDetails() {
-        Payment payment = new Payment("CASH_ON_DELIVERY", this.cashOnDeliveryDetails, this.customerOrder);
+        Payment payment = new Payment("7148aec0-26ea-47a1-aafe-c9eb598985f8",
+                "CASH_ON_DELIVERY", this.cashOnDeliveryDetails, this.customerOrder);
         assertEquals("SUCCESS", payment.getStatus());
         assertEquals(this.cashOnDeliveryDetails, payment.getPaymentData());
         assertEquals(this.customerOrder, payment.getOrder());
@@ -93,7 +101,8 @@ class PaymentTest {
         Map<String, String> codWithoutAddress = new HashMap<>();
         codWithoutAddress.put("address", "");
         codWithoutAddress.put("deliveryFee", "25000");
-        Payment payment1 = new Payment("CASH_ON_DELIVERY", codWithoutAddress, this.customerOrder);
+        Payment payment1 = new Payment("7148aec0-26ea-47a1-aafe-c9eb598985f8",
+                "CASH_ON_DELIVERY", codWithoutAddress, this.customerOrder);
         assertEquals("REJECTED", payment1.getStatus());
     }
 
@@ -102,31 +111,29 @@ class PaymentTest {
         Map<String, String> codWithoutFee = new HashMap<>();
         codWithoutFee.put("address", "Jalan Depok");
         codWithoutFee.put("deliveryFee", "");
-        Payment payment1 = new Payment("CASH_ON_DELIVERY", codWithoutFee, this.customerOrder);
+        Payment payment1 = new Payment("7148aec0-26ea-47a1-aafe-c9eb598985f8",
+                "CASH_ON_DELIVERY", codWithoutFee, this.customerOrder);
         assertEquals("REJECTED", payment1.getStatus());
     }
 
     @Test
     void testCreatePaymentWithoutOrder(){
         assertThrows(IllegalArgumentException.class,
-                () -> new Payment("VOUCHER", this.voucherDetails, null));
+                () -> new Payment("a5e93216-127c-43df-b7f1-89b720e496bb",
+                        "VOUCHER", this.voucherDetails, null));
     }
 
     @Test
     void testCreatePaymentWithInvalidMethod() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Payment("GRATIS", this.voucherDetails, null));
-    }
-
-    @Test
-    void testPaymentIdGenerated() {
-        Payment payment = new Payment("VOUCHER", this.voucherDetails, this.customerOrder);
-        assertNotNull(payment.getId());
+                () -> new Payment("a5e93216-127c-43df-b7f1-89b720e496bb",
+                        "GRATIS", this.voucherDetails, null));
     }
 
     @Test
     void testSetMethodToInvalidMethod(){
-        Payment payment = new Payment("VOUCHER", this.voucherDetails, this.customerOrder);
+        Payment payment = new Payment("a5e93216-127c-43df-b7f1-89b720e496bb",
+                "VOUCHER", this.voucherDetails, this.customerOrder);
         assertThrows(IllegalArgumentException.class,
                 () -> payment.setStatus("GRATIS"));
     }

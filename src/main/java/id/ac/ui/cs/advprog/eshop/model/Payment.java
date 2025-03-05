@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Getter
+@Setter
 public class Payment {
     String id;
     String method;
@@ -19,12 +20,12 @@ public class Payment {
     String status;
     Order order;
 
-    public Payment(String method, Map<String, String> paymentData, Order order) {
+    public Payment(String id, String method, Map<String, String> paymentData, Order order) {
         if (order == null || paymentData == null) {
             throw new IllegalArgumentException();
         }
 
-        this.id = UUID.randomUUID().toString();
+        this.id = id;
         this.order = order;
         this.paymentData = paymentData;
 
