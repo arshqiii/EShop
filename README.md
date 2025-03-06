@@ -114,8 +114,35 @@ Tanpa menerapkan prinsip SOLID, proyek dapat mengalami berbagai tantangan yang m
 
 ---
 
-
 </details>
 
+<details>
+    <summary>Tutorial 4</summary>
+
+---
+
+### Refleksi 
+> Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.
+
+Secara keseluruhan, dengan melakukan TDD pada tutorial ini saya dapat memastikan bahwa fitur berjalan sesuai dengan ekspektasi dan menjaga kualitas kode. Namun, ada beberapa aspek yang masih bisa saya tingkatkan, terutama dalam cakupan pengujian dan efisiensi kode. Namun untuk iterasi berikutnya, saya akan lebih fokus pada perencanaan skenario uji sebelum menulis implementasi karena saya merasa saya kurang strategis dalam merancang skenario uji sebelum mulai menulis implementasi, sehingga tidak semua pengujian selalu benar-benar mencerminkan kebutuhan sistem secara menyeluruh.
+
+---
+
+> You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.
+
+-  Fast: Tes case yang saya buat dapat berjalan cukup cepat karena menggunakan mocking untuk menghindari ketergantungan pada database.
+
+- Independent: Beberapa tes masih sudah independen dari class atau function lain, namun masih terdapat yang bergantung pada status objek yang sama, seperti yang menggunakan notasi @BeforeEach. 
+
+- Repeatable: Tes dapat dijalankan berkali-kali dengan hasil yang konsisten karena menggunakan input yang dikontrol.
+
+-  Self-Validating: Tes menggunakan assertions yang jelas untuk menentukan apakah hasilnya benar atau salah.
+
+- Timely: Tes yang saya buat dibuat sebelum dan diperbaiki seiring penulisan kode sehingga saya dapat memahami kemungkinan input dan output fungsi yang dibuat. 
+
+Secara keseluruhan, pengujian sudah cukup mengikuti prinsip F.I.R.S.T., tetapi masih ada ruang untuk perbaikan dalam hal independensi dan timeliness dari tes yang dibuat.
+
+---
+</details>
 
 
